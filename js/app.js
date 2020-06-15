@@ -1,3 +1,5 @@
+
+
 const btnAgregar = document.getElementById("btnAgregar").addEventListener("click",(e)=>{
     let marca = document.getElementById("marca").value;
     let ram=document.getElementById("ram").value;
@@ -70,3 +72,29 @@ btnEliminar.addEventListener("click",(e)=>{
     request.send("numero="+ id);
 });
 
+const btnModificar=document.getElementById("btnModificar");
+btnModificar.addEventListener("click",(e)=>{
+   let id = document.getElementById("mod").value;
+   var xhr = new XMLHttpRequest();
+  xhr.open("GET","http://localhost:3000/usuarios/"+id ,true);
+  xhr.onload=function(){
+    let details =document.getElementById("details");
+    if(xhr.status >= 200 && xhr.status < 400){
+        var request = new  XMLHttpRequest();
+        request.open('PUT',"http://localhost:3000/usuarios", true);
+        request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        let marca_nueva = document.getElementById("marca2").value;
+        let ram_nueva=document.getElementById("ram2").value;
+        let costo_nuevo=document.getElementById("costo2").value;
+        let cantidad_nueva=document.getElementById("cantidad2").value;
+        let Almacenamiento_nuevo=document.getElementById("almacenamiento2").value;
+        request.send("id="+id+"&marca_nueva="+marca_nueva+"&almacenamiento_nuevo="+Almacenamiento_nuevo+"&ram_nueva="+ram_nueva+"&costo_nuevo="+costo_nuevo+"&cantidad_nueva="+cantidad_nueva);
+        
+    } else {
+        console.log("error")
+        details.innerHTML += "Error en la llamada a la API";
+        }
+    
+    }
+    xhr.send();
+});

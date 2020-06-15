@@ -140,5 +140,17 @@ app.delete("/usuarios",cors(),(req,res)=>{
              
         }
 });
+app.put("/usuarios",cors(),(req,res)=>{
+    let computadora =new computadorasN(req.body.id,
+      req.body.marca_nueva,
+      req.body.almacenamiento_nuevo,
+      req.body.ram_nueva,
+      req.body.costo_nuevo,
+      req.body.cantidad_nueva);
+   computadoras[i]=computadora;
+  
+  res.send();    
+});
+
 
 
